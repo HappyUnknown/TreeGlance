@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,7 @@ namespace TreeGlance
             if (result == CommonFileDialogResult.Ok)
                 treeGlance.WriteSubpaths(folderDialog.FileName, true);
             #endregion
+            treeGlance.WriteFilesData();
         }
     }
 }
