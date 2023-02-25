@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Microsoft.WindowsAPICodePack.Dialogs;
+
 namespace TreeGlance
 {
     /// <summary>
@@ -20,6 +22,7 @@ namespace TreeGlance
     /// </summary>
     public partial class MainWindow : Window
     {
+        TreeGlanceApp treeGlance = new TreeGlanceApp();
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +30,21 @@ namespace TreeGlance
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
+            #region CommonOpenFileDialog
+            //Install-Package WindowsAPICodePack-Core
+            //Install-Package WindowsAPICodePack-ExtendedLinguisticServices
+            //Install-Package WindowsAPICodePack-Sensors
+            //Install-Package WindowsAPICodePack-Shell
+            //Install-Package WindowsAPICodePack-ShellExtensions
+            #endregion
 
+            #region Receiving folders' and subfolders' paths
+            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
+            folderDialog.IsFolderPicker = true;
+            CommonFileDialogResult result = folderDialog.ShowDialog();
+            if (result == CommonFileDialogResult.Ok)
+                treeGlance.WriteSubpaths(folderDialog.FileName, true);
+            #endregion
         }
     }
 }
