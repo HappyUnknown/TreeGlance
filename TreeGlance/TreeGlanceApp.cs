@@ -20,7 +20,14 @@ namespace TreeGlance
     {
         public string dirPathsFile = "dirpaths.txt";
         public string filePathsFile = "filepaths.txt";
-
+        private string[] RemoveEmpties(string[] lines)
+        {
+            List<string> noEmpties = new List<string>();
+            foreach (string l in lines)
+                if (l.Trim(' ').Length > 0)
+                    noEmpties.Add(l);
+            return noEmpties.ToArray();
+        }
         /// <summary>
         /// Writes paths (and subpaths) of directories included
         /// </summary>
@@ -28,7 +35,7 @@ namespace TreeGlance
         /// <param name="recursive">Do you want subpaths to be included?</param>
         public void WriteSubpaths(string path, bool recursive = false)
         {
-            var innerDirectories = Directory.GetDirectories(path).ToArray();
+            var innerDirectories = Directory.GetDirectories(path);
             foreach (string d in innerDirectories)
             {
                 File.AppendAllText(dirPathsFile, $"{d}\n\n");
@@ -51,7 +58,7 @@ namespace TreeGlance
         public void WriteFilesData()
         {
             File.Create(filePathsFile).Close();
-            var dirpaths = ReadDirPaths();
+            var dirpaths = RemoveEmpties(ReadDirPaths());
             foreach (string dp in dirpaths)
                 AppendFilesData(dp);
         }

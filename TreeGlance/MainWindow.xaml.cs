@@ -46,7 +46,11 @@ namespace TreeGlance
             if (result == CommonFileDialogResult.Ok)
                 treeGlance.WriteSubpaths(folderDialog.FileName, true);
             #endregion
-            treeGlance.WriteFilesData();
+            try
+            {
+                treeGlance.WriteFilesData();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
