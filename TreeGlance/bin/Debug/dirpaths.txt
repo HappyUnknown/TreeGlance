@@ -1,16 +1,16 @@
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\Games
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\Games\CS
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\Games\CS\pak01_001.vpk does not match the server's file
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\Software
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\Software\Programming
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\Software\Programming\Visual Studio
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Specialized fix\System
-E:\FILES\GENERAL-PURPOSE\NOTES\.Troubleshooting\Tips and tricks
-E:\FILES\GENERAL-PURPOSE\NOTES\FL
-E:\FILES\GENERAL-PURPOSE\NOTES\Programming
-E:\FILES\GENERAL-PURPOSE\NOTES\Programming\Complicated topics programming
-E:\FILES\GENERAL-PURPOSE\NOTES\pwds
-E:\FILES\GENERAL-PURPOSE\NOTES\Useful advice
-E:\FILES\GENERAL-PURPOSE\NOTES\VOICEMEETER
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting","CreatedOn":"2023-02-12T18:24:40.3003575+02:00","WroteOn":"2023-02-12T18:24:40.4612895+02:00","AccessedOn":"2023-02-26T14:54:02.5418381+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix","CreatedOn":"2023-02-12T18:24:40.3033582+02:00","WroteOn":"2023-02-12T18:24:40.4270731+02:00","AccessedOn":"2023-02-26T14:54:02.5418381+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\Games","CreatedOn":"2023-02-12T18:24:40.3053589+02:00","WroteOn":"2023-02-12T18:24:40.3073591+02:00","AccessedOn":"2023-02-26T14:54:02.5418381+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\Games\\CS","CreatedOn":"2023-02-12T18:24:40.3073591+02:00","WroteOn":"2023-02-12T18:24:40.3093594+02:00","AccessedOn":"2023-02-26T14:54:02.5418381+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\Games\\CS\\pak01_001.vpk does not match the server's file","CreatedOn":"2023-02-12T18:24:40.3093594+02:00","WroteOn":"2023-02-12T18:24:40.4130694+02:00","AccessedOn":"2023-02-26T14:54:02.5418381+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\Software","CreatedOn":"2023-02-12T18:24:40.4160746+02:00","WroteOn":"2023-02-12T18:24:40.418071+02:00","AccessedOn":"2023-02-26T14:54:02.543829+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\Software\\Programming","CreatedOn":"2023-02-12T18:24:40.418071+02:00","WroteOn":"2023-02-12T18:24:40.419071+02:00","AccessedOn":"2023-02-26T14:54:02.543829+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\Software\\Programming\\Visual Studio","CreatedOn":"2023-02-12T18:24:40.419071+02:00","WroteOn":"2023-02-12T18:24:40.4250714+02:00","AccessedOn":"2023-02-26T14:54:02.543829+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Specialized fix\\System","CreatedOn":"2023-02-12T18:24:40.4270731+02:00","WroteOn":"2023-02-12T18:24:40.4582878+02:00","AccessedOn":"2023-02-26T14:54:02.543829+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\.Troubleshooting\\Tips and tricks","CreatedOn":"2023-02-12T18:24:40.4612895+02:00","WroteOn":"2023-02-12T18:24:40.4652904+02:00","AccessedOn":"2023-02-26T14:54:02.5458389+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\FL","CreatedOn":"2023-02-12T18:24:40.4682915+02:00","WroteOn":"2023-02-12T18:24:40.5079023+02:00","AccessedOn":"2023-02-26T14:54:02.5458389+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\Programming","CreatedOn":"2023-02-12T18:24:40.5109018+02:00","WroteOn":"2023-02-12T18:24:40.7506167+02:00","AccessedOn":"2023-02-26T14:54:02.5488301+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\Programming\\Complicated topics programming","CreatedOn":"2023-02-12T18:24:40.7506167+02:00","WroteOn":"2023-02-12T18:24:40.8857298+02:00","AccessedOn":"2023-02-26T14:54:02.5628335+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\pwds","CreatedOn":"2023-02-12T18:24:40.8887302+02:00","WroteOn":"2023-02-12T18:24:40.8967319+02:00","AccessedOn":"2023-02-26T15:22:22.1510361+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\Useful advice","CreatedOn":"2023-02-12T18:24:40.8987327+02:00","WroteOn":"2023-02-12T18:24:40.909032+02:00","AccessedOn":"2023-02-26T15:22:22.1759685+02:00"}
+{"Path":"E:\\FILES\\GENERAL-PURPOSE\\NOTES\\VOICEMEETER","CreatedOn":"2023-02-12T18:24:40.9110314+02:00","WroteOn":"2023-02-12T18:24:40.9320174+02:00","AccessedOn":"2023-02-26T14:54:02.5728424+02:00"}

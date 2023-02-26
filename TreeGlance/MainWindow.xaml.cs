@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,17 +39,21 @@ namespace TreeGlance
             #endregion
 
             #region Receiving folders' and subfolders' paths
-            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
-            folderDialog.IsFolderPicker = true;
-            CommonFileDialogResult result = folderDialog.ShowDialog();
-            if (result == CommonFileDialogResult.Ok)
-                treeGlance.WriteSubpathsSafe(folderDialog.FileName, true);
-            #endregion
             try
             {
-                treeGlance.WriteFilesData();
+                CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
+                folderDialog.IsFolderPicker = true;
+                CommonFileDialogResult result = folderDialog.ShowDialog();
+                if (result == CommonFileDialogResult.Ok)
+                    treeGlance.WriteSubpathsSafe(folderDialog.FileName, true);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show($"{ex.Message}"); }
+            #endregion
+            //try
+            //{
+            //    treeGlance.WriteFilesData();
+            //}
+            //catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
