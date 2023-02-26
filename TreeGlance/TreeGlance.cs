@@ -10,12 +10,16 @@ namespace TreeGlance
 {
     static class StringExtension
     {
-        public static LineDirectoryInfo DeserializeLineDirInfo(this string ldiStr) 
+        public static LineDirectoryInfo DeserializeLineDirInfo(this string ldiStr)
         {
             return JsonConvert.DeserializeObject<LineDirectoryInfo>(ldiStr);
         }
+        public static LineFileInfo DeserializeLineFileInfo(this string ldiStr)
+        {
+            return JsonConvert.DeserializeObject<LineFileInfo>(ldiStr);
+        }
     }
-    static class LineDirectoryExtensions 
+    static class LineDirectoryExtensions
     {
         public static LineDirectoryInfo[] ToLineDirectories(this string[] lineDirStrs)
         {
@@ -25,7 +29,7 @@ namespace TreeGlance
             return lineDirs;
         }
     }
-    class ExplorerInfo 
+    class ExplorerInfo
     {
         public double Size { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -33,12 +37,12 @@ namespace TreeGlance
         public DateTime AccessedOn { get; set; }
         public string Path { get; set; }
     }
-    class LineDirectoryInfo:ExplorerInfo
+    class LineDirectoryInfo : ExplorerInfo
     {
         public LineDirectoryInfo(string path)
         {
             Size = 0;
-            var files =  Directory.GetFiles(path);
+            var files = Directory.GetFiles(path);
             foreach (var fpath in files)
                 Size += new FileInfo(fpath).GetFileSize();
             Path = path;
@@ -58,17 +62,29 @@ namespace TreeGlance
         {
             Path = path;
             FileInfo file = new FileInfo(Path);
+            Size = file.GetFileSize();
             CreatedOn = file.CreationTime;
             WroteOn = file.LastWriteTime;
             AccessedOn = file.LastAccessTime;
         }
+        public string Serialize()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
     static class FileInfoExtension
     {
+        /// <summary>
+        /// Extension responsible for translating byte size to megabytes
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="inMB"></param>
+        /// <returns></returns>
         public static double GetFileSize(this FileInfo file, bool inMB = true)
         {
+            const int BYTES_IN_MB = 1048576;
             double size = file.Length;
-            if (inMB) size /= 1048576;
+            if (inMB) size /= BYTES_IN_MB;
             return size;
         }
     }
@@ -136,7 +152,7 @@ namespace TreeGlance
         {
             var filePaths = Directory.GetFiles(dirpath).ToArray();
             foreach (string f in filePaths)
-                File.AppendAllText(filePathsFile, $"{f}\n{new FileInfo(f).GetFileSize()}\n{new FileInfo(f).CreationTime}\n{new FileInfo(f).LastWriteTime}\n{new FileInfo(f).LastAccessTime}\n\n");
+                File.AppendAllText(filePathsFile, $"{new LineFileInfo(f).Serialize()}\n");
         }
         /// <summary>
         /// Recreates filepaths' file, reads LineDirectoryInfo-jsons; then, appends file data for each of the paths
