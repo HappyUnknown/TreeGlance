@@ -8,6 +8,23 @@ using System.Threading.Tasks;
 
 namespace TreeGlance
 {
+    static class StringExtension
+    {
+        public static LineDirectoryInfo DeserializeLineDirInfo(this string ldiStr) 
+        {
+            return JsonConvert.DeserializeObject<LineDirectoryInfo>(ldiStr);
+        }
+    }
+    static class LineDirectoryExtensions 
+    {
+        public static LineDirectoryInfo[] ToLineDirectories(this string[] lineDirStrs)
+        {
+            LineDirectoryInfo[] lineDirs = new LineDirectoryInfo[lineDirStrs.Length];
+            for (int i = 0; i < lineDirStrs.Length; i++)
+                lineDirs[i] = lineDirStrs[i].DeserializeLineDirInfo();
+            return lineDirs;
+        }
+    }
     class ExplorerInfo 
     {
         public double Size { get; set; }
@@ -127,7 +144,7 @@ namespace TreeGlance
         public void WriteFilesData()
         {
             File.Create(filePathsFile).Close();
-            var ldis = GetLDIs(RemoveEmpties(ReadDirJSONs()));
+            var ldis = RemoveEmpties(ReadDirJSONs()).ToLineDirectories();
             foreach (LineDirectoryInfo ldi in ldis)
                 AppendFilesData(ldi.Path);
         }

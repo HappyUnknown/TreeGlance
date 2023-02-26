@@ -49,11 +49,11 @@ namespace TreeGlance
             }
             catch (Exception ex) { MessageBox.Show($"{ex.Message}"); }
             #endregion
-            //try
-            //{
-            //    treeGlance.WriteFilesData();
-            //}
-            //catch (Exception ex) { MessageBox.Show(ex.Message); }
+            try
+            {
+                treeGlance.WriteFilesData();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
