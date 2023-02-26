@@ -44,7 +44,7 @@ namespace TreeGlance
             folderDialog.IsFolderPicker = true;
             CommonFileDialogResult result = folderDialog.ShowDialog();
             if (result == CommonFileDialogResult.Ok)
-                treeGlance.WriteSubpaths(folderDialog.FileName, true);
+                treeGlance.WriteSubpathsSafe(folderDialog.FileName, true);
             #endregion
             try
             {

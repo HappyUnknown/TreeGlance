@@ -24,3 +24,11 @@ E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.xml
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\TreeGlance.csproj.CopyComplete
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\System.Memory.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\System.Text.Json.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\System.Numerics.Vectors.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\System.Buffers.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\System.Text.Encodings.Web.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\TreeGlance.exe.config

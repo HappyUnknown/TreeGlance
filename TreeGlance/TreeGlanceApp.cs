@@ -28,6 +28,11 @@ namespace TreeGlance
                     noEmpties.Add(l);
             return noEmpties.ToArray();
         }
+        public void WriteSubpathsSafe(string path, bool recursive = false) 
+        {
+            File.Create(dirPathsFile).Close();
+            WriteSubpaths(path, recursive);
+        }
         /// <summary>
         /// Writes paths (and subpaths) of directories included
         /// </summary>
@@ -38,7 +43,7 @@ namespace TreeGlance
             var innerDirectories = Directory.GetDirectories(path);
             foreach (string d in innerDirectories)
             {
-                File.AppendAllText(dirPathsFile, $"{d}\n\n");
+                File.AppendAllText(dirPathsFile, $"{d}\n");
                 if (recursive)
                     WriteSubpaths(d, recursive);
             }
