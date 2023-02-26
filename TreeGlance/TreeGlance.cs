@@ -8,14 +8,22 @@ using System.Threading.Tasks;
 
 namespace TreeGlance
 {
-    class LineDirectoryInfo
+    class ExplorerInfo 
     {
-        public string Path { get; set; }
+        public double Size { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime WroteOn { get; set; }
         public DateTime AccessedOn { get; set; }
+        public string Path { get; set; }
+    }
+    class LineDirectoryInfo:ExplorerInfo
+    {
         public LineDirectoryInfo(string path)
         {
+            Size = 0;
+            var files =  Directory.GetFiles(path);
+            foreach (var fpath in files)
+                Size += new FileInfo(fpath).GetFileSize();
             Path = path;
             DirectoryInfo directory = new DirectoryInfo(Path);
             CreatedOn = directory.CreationTime;
@@ -25,6 +33,17 @@ namespace TreeGlance
         public string Serialize()
         {
             return JsonConvert.SerializeObject(this);
+        }
+    }
+    class LineFileInfo : ExplorerInfo
+    {
+        public LineFileInfo(string path)
+        {
+            Path = path;
+            FileInfo file = new FileInfo(Path);
+            CreatedOn = file.CreationTime;
+            WroteOn = file.LastWriteTime;
+            AccessedOn = file.LastAccessTime;
         }
     }
     static class FileInfoExtension
