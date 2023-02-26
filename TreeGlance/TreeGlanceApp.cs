@@ -3,10 +3,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TreeGlance
 {
+    class LineDirectoryInfo
+    {
+        public string Path { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime WroteOn { get; set; }
+        public DateTime AccessedOn { get; set; }
+        public LineDirectoryInfo(string path)
+        {
+            Path = path;
+            DirectoryInfo directory = new DirectoryInfo(Path);
+            CreatedOn = directory.CreationTime;
+            WroteOn = directory.LastWriteTime;
+            AccessedOn = directory.LastAccessTime;
+        }
+    }
     static class FileInfoExtension
     {
         public static double GetFileSize(this FileInfo file, bool inMB = true)
@@ -28,7 +44,15 @@ namespace TreeGlance
                     noEmpties.Add(l);
             return noEmpties.ToArray();
         }
-        public void WriteSubpathsSafe(string path, bool recursive = false) 
+        private LineDirectoryInfo[] GetLDIs(string[] paths)
+        {
+            List<LineDirectoryInfo> noEmpties = new List<LineDirectoryInfo>();
+            foreach (string p in paths)
+                if (p.Trim(' ').Length > 0)
+                    noEmpties.Add(new LineDirectoryInfo(p));
+            return noEmpties.ToArray();
+        }
+        public void WriteSubpathsSafe(string path, bool recursive = false)
         {
             File.Create(dirPathsFile).Close();
             WriteSubpaths(path, recursive);
@@ -43,7 +67,7 @@ namespace TreeGlance
             var innerDirectories = Directory.GetDirectories(path);
             foreach (string d in innerDirectories)
             {
-                File.AppendAllText(dirPathsFile, $"{d}\n");
+                File.AppendAllText(dirPathsFile, $"{new LineDirectoryInfo(d).Path}\n");
                 if (recursive)
                     WriteSubpaths(d, recursive);
             }
@@ -63,11 +87,11 @@ namespace TreeGlance
         public void WriteFilesData()
         {
             File.Create(filePathsFile).Close();
-            var dirpaths = RemoveEmpties(ReadDirPaths());
-            foreach (string dp in dirpaths)
-                AppendFilesData(dp);
+            var ldis = GetLDIs(RemoveEmpties(ReadDirJSONs()));
+            foreach (LineDirectoryInfo ldi in ldis)
+                AppendFilesData(ldi.Path);
         }
-        public string[] ReadDirPaths()
+        public string[] ReadDirJSONs()
         {
             return File.ReadAllLines(dirPathsFile);
         }
