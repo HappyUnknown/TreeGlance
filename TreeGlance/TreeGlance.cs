@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace TreeGlance
 {
+    static class DirectoryInfoExtensions
+    {
+        public static double GetDirectorySize(this DirectoryInfo directory)
+        {
+            double size = 0;
+            foreach (FileInfo file in directory.GetFiles())
+                size += file.GetFileSize();
+            return size;
+        }
+    }
     static class StringExtension
     {
         public static LineDirectoryInfo DeserializeLineDirInfo(this string ldiStr)
@@ -28,10 +38,26 @@ namespace TreeGlance
                 lineDirs[i] = lineDirStrs[i].DeserializeLineDirInfo();
             return lineDirs;
         }
+        public static List<LineDirectoryInfo> SortBySize(this List<LineDirectoryInfo> dirInfos)
+        {
+            for (int i = 0; i < dirInfos.Count; i++)
+            {
+                for (int j = i; j < dirInfos.Count; j++)
+                {
+                    if (dirInfos[i].SizeMB > dirInfos[j].SizeMB)
+                    {
+                        var temp = dirInfos[i];
+                        dirInfos[i] = dirInfos[j];
+                        dirInfos[j] = temp;
+                    }
+                }
+            }
+            return dirInfos;
+        }
     }
     class ExplorerInfo
     {
-        public double Size { get; set; }
+        public double SizeMB { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime WroteOn { get; set; }
         public DateTime AccessedOn { get; set; }
@@ -41,10 +67,10 @@ namespace TreeGlance
     {
         public LineDirectoryInfo(string path)
         {
-            Size = 0;
+            SizeMB = 0;
             var files = Directory.GetFiles(path);
             foreach (var fpath in files)
-                Size += new FileInfo(fpath).GetFileSize();
+                SizeMB += new FileInfo(fpath).GetFileSize();
             Path = path;
             DirectoryInfo directory = new DirectoryInfo(Path);
             CreatedOn = directory.CreationTime;
@@ -58,14 +84,16 @@ namespace TreeGlance
     }
     class LineFileInfo : ExplorerInfo
     {
+        public string Name { get; set; }
         public LineFileInfo(string path)
         {
             Path = path;
             FileInfo file = new FileInfo(Path);
-            Size = file.GetFileSize();
+            SizeMB = file.GetFileSize();
             CreatedOn = file.CreationTime;
             WroteOn = file.LastWriteTime;
             AccessedOn = file.LastAccessTime;
+            Name = System.IO.Path.GetFileName(Path);
         }
         public string Serialize()
         {
@@ -123,28 +151,31 @@ namespace TreeGlance
         /// </summary>
         /// <param name="path"></param>
         /// <param name="recursive"></param>
-        public void WriteSubpathsSafe(string path, ref System.Windows.Controls.DataGrid grid, bool recursive = false)
+        public double WriteSubpathsSafe(string path, ref System.Windows.Controls.DataGrid grid, bool recursive = false)
         {
+            double branchSize = 0;
             List<LineDirectoryInfo> lineDirInfo = new List<LineDirectoryInfo>();
             File.Create(dirPathsFile).Close();
-            WriteSubpaths(path, ref lineDirInfo, recursive);
-            grid.ItemsSource = lineDirInfo;
+            WriteSubpaths(path, ref lineDirInfo, ref branchSize, recursive);
+            grid.ItemsSource = lineDirInfo.SortBySize();
+            return branchSize;
         }
         /// <summary>
         /// Writes paths (and subpaths) of directories included
         /// </summary>
         /// <param name="path">Paths, where we need to hold a search</param>
         /// <param name="recursive">Do you want subpaths to be included?</param>
-        public void WriteSubpaths(string path, ref List<LineDirectoryInfo> lineDirInfo, bool recursive = false)
+        public void WriteSubpaths(string path, ref List<LineDirectoryInfo> lineDirInfo, ref double branchSize, bool recursive = false)
         {
             var innerDirectories = Directory.GetDirectories(path);
             foreach (string d in innerDirectories)
             {
                 LineDirectoryInfo theDirInfo = new LineDirectoryInfo(d);
                 lineDirInfo.Add(theDirInfo);
+                branchSize += theDirInfo.SizeMB;
                 File.AppendAllText(dirPathsFile, $"{theDirInfo.Serialize()}\n");
                 if (recursive)
-                    WriteSubpaths(d, ref lineDirInfo, recursive);
+                    WriteSubpaths(d, ref lineDirInfo, ref branchSize, recursive);
             }
         }
         /// <summary>
@@ -175,6 +206,14 @@ namespace TreeGlance
         public string[] ReadDirJSONs()
         {
             return File.ReadAllLines(dirPathsFile);
+        }
+        public void DisplayBranchFraction(ref System.Windows.Controls.ProgressBar bar, double totalSize, double branchSizeMB)
+        {
+            const int BYTES_IN_MB = 1024 * 1024;
+            bar.Minimum = 0;
+            bar.Maximum = totalSize / BYTES_IN_MB;
+            bar.Value = branchSizeMB;
+            bar.ToolTip = (int)bar.Value + " MB of " + (int)bar.Maximum;
         }
     }
 }
