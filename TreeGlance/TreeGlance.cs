@@ -123,24 +123,28 @@ namespace TreeGlance
         /// </summary>
         /// <param name="path"></param>
         /// <param name="recursive"></param>
-        public void WriteSubpathsSafe(string path, bool recursive = false)
+        public void WriteSubpathsSafe(string path, ref System.Windows.Controls.DataGrid grid, bool recursive = false)
         {
+            List<LineDirectoryInfo> lineDirInfo = new List<LineDirectoryInfo>();
             File.Create(dirPathsFile).Close();
-            WriteSubpaths(path, recursive);
+            WriteSubpaths(path, ref lineDirInfo, recursive);
+            grid.ItemsSource = lineDirInfo;
         }
         /// <summary>
         /// Writes paths (and subpaths) of directories included
         /// </summary>
         /// <param name="path">Paths, where we need to hold a search</param>
         /// <param name="recursive">Do you want subpaths to be included?</param>
-        public void WriteSubpaths(string path, bool recursive = false)
+        public void WriteSubpaths(string path, ref List<LineDirectoryInfo> lineDirInfo, bool recursive = false)
         {
             var innerDirectories = Directory.GetDirectories(path);
             foreach (string d in innerDirectories)
             {
-                File.AppendAllText(dirPathsFile, $"{new LineDirectoryInfo(d).Serialize()}\n");
+                LineDirectoryInfo theDirInfo = new LineDirectoryInfo(d);
+                lineDirInfo.Add(theDirInfo);
+                File.AppendAllText(dirPathsFile, $"{theDirInfo.Serialize()}\n");
                 if (recursive)
-                    WriteSubpaths(d, recursive);
+                    WriteSubpaths(d, ref lineDirInfo, recursive);
             }
         }
         /// <summary>

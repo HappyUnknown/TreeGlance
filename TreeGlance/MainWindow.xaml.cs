@@ -45,7 +45,7 @@ namespace TreeGlance
                 folderDialog.IsFolderPicker = true;
                 CommonFileDialogResult result = folderDialog.ShowDialog();
                 if (result == CommonFileDialogResult.Ok)
-                    treeGlance.WriteSubpathsSafe(folderDialog.FileName, true);
+                    treeGlance.WriteSubpathsSafe(folderDialog.FileName, ref tblDirAnalyse, true);
             }
             catch (Exception ex) { MessageBox.Show($"{ex.Message}"); }
             #endregion
