@@ -175,7 +175,13 @@ namespace TreeGlance
             double branchSize = 0;
             List<LineDirectoryInfo> lineDirInfo = new List<LineDirectoryInfo>();
             File.Create(dirPathsFile).Close();
-            WriteSubpaths(path, ref lineDirInfo, ref branchSize, recursive);
+
+            LineDirectoryInfo rootLDI = new LineDirectoryInfo(path);
+            lineDirInfo.Add(rootLDI);
+            branchSize += rootLDI.SizeMB;
+            File.AppendAllText(dirPathsFile, $"{rootLDI.Serialize()}\n");
+
+            try { WriteSubpaths(path, ref lineDirInfo, ref branchSize, recursive); } catch { } //HOTFIX FOR LONG PATHS (LIKE IN YUKKI MUSIC BOT)
             grid.ItemsSource = lineDirInfo.SortBySize();
             return branchSize;
         }

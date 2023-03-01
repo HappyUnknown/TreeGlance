@@ -51,11 +51,11 @@ namespace TreeGlance
             }
             catch (Exception ex) { MessageBox.Show($"{ex.Message}"); }
             #endregion
-            try
-            {
-                treeGlance.WriteFilesData();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //try
+            //{
+            //    treeGlance.WriteFilesData();
+            //}
+            //catch (Exception ex) { MessageBox.Show($"{ex.Message}"); }
         }
         private void tblDirAnalyse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -45,7 +45,6 @@ E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.xml
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.xml
-E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\TreeGlance.csproj.AssemblyReference.cache
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\MainWindow.g.cs
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\App.g.cs
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\TreeGlance_MarkupCompile.cache
