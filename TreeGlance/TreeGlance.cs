@@ -29,6 +29,25 @@ namespace TreeGlance
             return JsonConvert.DeserializeObject<LineFileInfo>(ldiStr);
         }
     }
+    static class LineFileExtensions 
+    {
+        public static List<LineFileInfo> SortBySize(this List<LineFileInfo> dirInfos)
+        {
+            for (int i = 0; i < dirInfos.Count; i++)
+            {
+                for (int j = i; j < dirInfos.Count; j++)
+                {
+                    if (dirInfos[i].SizeMB > dirInfos[j].SizeMB)
+                    {
+                        var temp = dirInfos[i];
+                        dirInfos[i] = dirInfos[j];
+                        dirInfos[j] = temp;
+                    }
+                }
+            }
+            return dirInfos;
+        }
+    }
     static class LineDirectoryExtensions
     {
         public static LineDirectoryInfo[] ToLineDirectories(this string[] lineDirStrs)

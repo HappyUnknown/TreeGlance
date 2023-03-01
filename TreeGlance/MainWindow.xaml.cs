@@ -61,7 +61,7 @@ namespace TreeGlance
         {
             try
             {
-                tblFileInfo.ItemsSource = treeGlance.GetDirFiles(ref tblDirAnalyse);
+                tblFileInfo.ItemsSource = treeGlance.GetDirFiles(ref tblDirAnalyse).SortBySize();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
