@@ -29,7 +29,7 @@ namespace TreeGlance
             return JsonConvert.DeserializeObject<LineFileInfo>(ldiStr);
         }
     }
-    static class LineFileExtensions 
+    static class LineFileExtensions
     {
         public static List<LineFileInfo> SortBySize(this List<LineFileInfo> dirInfos)
         {
@@ -89,7 +89,8 @@ namespace TreeGlance
             SizeMB = 0;
             var files = Directory.GetFiles(path);
             foreach (var fpath in files)
-                SizeMB += new FileInfo(fpath).GetFileSize();
+                if (File.Exists(fpath))
+                    SizeMB += new FileInfo(fpath).GetFileSize();
             Path = path;
             DirectoryInfo directory = new DirectoryInfo(Path);
             CreatedOn = directory.CreationTime;

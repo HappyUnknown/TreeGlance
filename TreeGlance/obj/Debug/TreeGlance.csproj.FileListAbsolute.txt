@@ -59,3 +59,4 @@ E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\TreeGlance.pdb
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Newtonsoft.Json.dll
 E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\bin\Debug\Newtonsoft.Json.xml
+E:\FILES\GENERAL-PURPOSE\PROJECTS\PROGRAMMING\Source - Visual Studio\Author Apps\TreeGlance\TreeGlance\obj\Debug\TreeGlance.csproj.AssemblyReference.cache
