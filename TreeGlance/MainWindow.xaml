@@ -14,10 +14,10 @@
                     <Button Name="btnSelect" Width="100" Height="20" Content="Select" Click="btnSelect_Click"/>
                     <Button x:Name="btnDelete" Width="100" Height="20" Content="Delete"/>
                 </WrapPanel>
-                <DataGrid x:Name="tblFileInfo" FontSize="16" FontWeight="Bold" Margin="10">
+                <DataGrid x:Name="tblDirAnalyse" FontSize="16" FontWeight="Bold" Margin="10" SelectionChanged="tblDirAnalyse_SelectionChanged">
                     <DataGrid.Columns></DataGrid.Columns>
                 </DataGrid>
-                <DataGrid x:Name="tblDirAnalyse" FontSize="16" FontWeight="Bold" Margin="10">
+                <DataGrid x:Name="tblFileInfo" FontSize="16" FontWeight="Bold" Margin="10">
                     <DataGrid.Columns></DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
