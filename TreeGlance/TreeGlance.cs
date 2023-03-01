@@ -215,5 +215,15 @@ namespace TreeGlance
             bar.Value = branchSizeMB;
             bar.ToolTip = (int)bar.Value + " MB of " + (int)bar.Maximum;
         }
+
+        public List<LineFileInfo> GetDirFiles(ref System.Windows.Controls.DataGrid dirGrid)
+        {
+            LineDirectoryInfo theDir = dirGrid.SelectedItem as LineDirectoryInfo;
+            string[] files = System.IO.Directory.GetFiles(theDir.Path);
+            List<LineFileInfo> fileInfos = new List<LineFileInfo>();
+            for (int i = 0; i < files.Length; i++)
+                fileInfos.Add(new LineFileInfo(files[i]));
+            return fileInfos;
+        }
     }
 }

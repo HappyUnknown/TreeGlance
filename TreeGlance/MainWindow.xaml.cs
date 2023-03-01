@@ -57,17 +57,11 @@ namespace TreeGlance
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
         private void tblDirAnalyse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LineDirectoryInfo theDir = ((DataGrid)sender).SelectedItem as LineDirectoryInfo;
             try
             {
-                string[] files = System.IO.Directory.GetFiles(theDir.Path);
-                List<LineFileInfo> fileInfos = new List<LineFileInfo>();
-                for (int i = 0; i < files.Length; i++)
-                    fileInfos.Add(new LineFileInfo(files[i]));
-                tblFileInfo.ItemsSource = fileInfos;
+                tblFileInfo.ItemsSource = treeGlance.GetDirFiles(ref tblDirAnalyse);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
