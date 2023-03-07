@@ -203,12 +203,15 @@ namespace TreeGlance
         /// <param name="recursive">Do you want subpaths to be included?</param>
         public void WriteSubpaths(string path, ref List<LineDirectoryInfo> lineDirInfo, ref double branchSize, bool recursive = false)
         {
-            var innerDirectories = Directory.GetDirectories(path);
-            foreach (string d in innerDirectories)
+            if (Directory.Exists(path)) // fix for "could not find part of the path"
             {
-                AddDirInfo(d, ref lineDirInfo, ref branchSize);
-                if (recursive)
-                    WriteSubpaths(d, ref lineDirInfo, ref branchSize, recursive);
+                var innerDirectories = Directory.GetDirectories(path);
+                foreach (string d in innerDirectories)
+                {
+                    AddDirInfo(d, ref lineDirInfo, ref branchSize);
+                    if (recursive)
+                        WriteSubpaths(d, ref lineDirInfo, ref branchSize, recursive);
+                }
             }
         }
         /// <summary>

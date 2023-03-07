@@ -49,7 +49,7 @@ namespace TreeGlance
                     branchSize = treeGlance.WriteSubpathsSafe(folderDialog.FileName, ref tblDirAnalyse, true);
                 treeGlance.DisplayBranchFraction(ref pbSpacePart, new System.IO.DriveInfo(folderDialog.FileName.Substring(0, folderDialog.FileName.IndexOf(':'))).TotalSize, branchSize);
             }
-            catch (Exception ex) { MessageBox.Show($"{ex.Message}"); }
+            catch (Exception ex) { MessageBox.Show($"btnSelect_Click(): {ex.Message}"); }
             #endregion
             //try
             //{
