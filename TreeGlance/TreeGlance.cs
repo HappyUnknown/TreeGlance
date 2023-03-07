@@ -167,16 +167,18 @@ namespace TreeGlance
             return noEmpties.ToArray();
         }
         /// <summary>
-        /// Add directory info to both lineDirInfo-list, and subpaths-directory list; sumate overall size
+        /// Add directory info to subpaths-directory list
         /// </summary>
         /// <param name="dirPath"></param>
         /// <param name="lineDirInfo"></param>
         /// <param name="branchSize"></param>
-        void AddDirInfo(string dirPath, ref List<LineDirectoryInfo> lineDirInfo, ref double branchSize)
+        void WriteDirInfo(string dirPath)
         {
             LineDirectoryInfo theDirInfo = new LineDirectoryInfo(dirPath);
-            lineDirInfo.Add(theDirInfo);
-            branchSize += theDirInfo.SizeMB;
+            #region This heck is now being done from file afterwards, to split the task a bit
+            //lineDirInfo.Add(theDirInfo);
+            //branchSize += theDirInfo.SizeMB;
+            #endregion
             File.AppendAllText(dirPathsFile, $"{theDirInfo.Serialize()}\n");
         }
         /// <summary>
@@ -184,16 +186,25 @@ namespace TreeGlance
         /// </summary>
         /// <param name="path"></param>
         /// <param name="recursive"></param>
-        public double WriteSubpathsSafe(string path, ref System.Windows.Controls.DataGrid grid, bool recursive = false)
+        public double WriteRootAndSubs(string path, ref System.Windows.Controls.DataGrid grid, bool recursive = false)
         {
             double branchSize = 0;
             List<LineDirectoryInfo> lineDirInfo = new List<LineDirectoryInfo>();
             File.Create(dirPathsFile).Close();
 
-            AddDirInfo(path, ref lineDirInfo, ref branchSize);
+            WriteDirInfo(path);
 
-            try { WriteSubpaths(path, ref lineDirInfo, ref branchSize, recursive); } catch { } //HOTFIX FOR LONG PATHS (LIKE IN YUKKI MUSIC BOT)
+            try { WriteSubpaths(path, recursive); } catch (Exception ex) { System.Windows.MessageBox.Show($"WriteRootAndSubs(): {ex.Message}"); } //HOTFIX FOR LONG PATHS (LIKE IN YUKKI MUSIC BOT)
+
+            foreach (string dirline in File.ReadAllLines(dirPathsFile))
+            {
+                var deserialized = dirline.DeserializeLineDirInfo();
+                lineDirInfo.Add(deserialized);
+                branchSize += deserialized.SizeMB;
+            }
+
             grid.ItemsSource = lineDirInfo.SortBySize();
+
             return branchSize;
         }
         /// <summary>
@@ -201,17 +212,14 @@ namespace TreeGlance
         /// </summary>
         /// <param name="path">Paths, where we need to hold a search</param>
         /// <param name="recursive">Do you want subpaths to be included?</param>
-        public void WriteSubpaths(string path, ref List<LineDirectoryInfo> lineDirInfo, ref double branchSize, bool recursive = false)
+        public void WriteSubpaths(string path, bool recursive = false)
         {
-            if (Directory.Exists(path)) // fix for "could not find part of the path"
+            var innerDirectories = Directory.GetDirectories(path);
+            foreach (string d in innerDirectories)
             {
-                var innerDirectories = Directory.GetDirectories(path);
-                foreach (string d in innerDirectories)
-                {
-                    AddDirInfo(d, ref lineDirInfo, ref branchSize);
-                    if (recursive)
-                        WriteSubpaths(d, ref lineDirInfo, ref branchSize, recursive);
-                }
+                WriteDirInfo(d);
+                if (recursive)
+                    WriteSubpaths(d, recursive);
             }
         }
         /// <summary>

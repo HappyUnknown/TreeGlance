@@ -41,12 +41,12 @@ namespace TreeGlance
             #region Receiving folders' and subfolders' paths
             try
             {
-                double branchSize = 0;
                 CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
                 folderDialog.IsFolderPicker = true;
                 CommonFileDialogResult result = folderDialog.ShowDialog();
+                double branchSize = 0;
                 if (result == CommonFileDialogResult.Ok)
-                    branchSize = treeGlance.WriteSubpathsSafe(folderDialog.FileName, ref tblDirAnalyse, true);
+                    branchSize = treeGlance.WriteRootAndSubs(folderDialog.FileName, ref tblDirAnalyse, true);
                 treeGlance.DisplayBranchFraction(ref pbSpacePart, new System.IO.DriveInfo(folderDialog.FileName.Substring(0, folderDialog.FileName.IndexOf(':'))).TotalSize, branchSize);
             }
             catch (Exception ex) { MessageBox.Show($"btnSelect_Click(): {ex.Message}"); }
@@ -63,7 +63,7 @@ namespace TreeGlance
             {
                 tblFileInfo.ItemsSource = treeGlance.GetDirFiles(ref tblDirAnalyse).SortBySize();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show($"tblDirAnalyse_SelectionChanged(): {ex.Message}"); }
         }
     }
 }
