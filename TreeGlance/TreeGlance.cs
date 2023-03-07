@@ -167,6 +167,19 @@ namespace TreeGlance
             return noEmpties.ToArray();
         }
         /// <summary>
+        /// Add directory info to both lineDirInfo-list, and subpaths-directory list; sumate overall size
+        /// </summary>
+        /// <param name="dirPath"></param>
+        /// <param name="lineDirInfo"></param>
+        /// <param name="branchSize"></param>
+        void AddDirInfo(string dirPath, ref List<LineDirectoryInfo> lineDirInfo, ref double branchSize)
+        {
+            LineDirectoryInfo theDirInfo = new LineDirectoryInfo(dirPath);
+            lineDirInfo.Add(theDirInfo);
+            branchSize += theDirInfo.SizeMB;
+            File.AppendAllText(dirPathsFile, $"{theDirInfo.Serialize()}\n");
+        }
+        /// <summary>
         /// Launches WriteSubpath() recursive function, but recreates destination textfile first
         /// </summary>
         /// <param name="path"></param>
@@ -177,10 +190,7 @@ namespace TreeGlance
             List<LineDirectoryInfo> lineDirInfo = new List<LineDirectoryInfo>();
             File.Create(dirPathsFile).Close();
 
-            LineDirectoryInfo rootLDI = new LineDirectoryInfo(path);
-            lineDirInfo.Add(rootLDI);
-            branchSize += rootLDI.SizeMB;
-            File.AppendAllText(dirPathsFile, $"{rootLDI.Serialize()}\n");
+            AddDirInfo(path, ref lineDirInfo, ref branchSize);
 
             try { WriteSubpaths(path, ref lineDirInfo, ref branchSize, recursive); } catch { } //HOTFIX FOR LONG PATHS (LIKE IN YUKKI MUSIC BOT)
             grid.ItemsSource = lineDirInfo.SortBySize();
@@ -196,10 +206,7 @@ namespace TreeGlance
             var innerDirectories = Directory.GetDirectories(path);
             foreach (string d in innerDirectories)
             {
-                LineDirectoryInfo theDirInfo = new LineDirectoryInfo(d);
-                lineDirInfo.Add(theDirInfo);
-                branchSize += theDirInfo.SizeMB;
-                File.AppendAllText(dirPathsFile, $"{theDirInfo.Serialize()}\n");
+                AddDirInfo(d, ref lineDirInfo, ref branchSize);
                 if (recursive)
                     WriteSubpaths(d, ref lineDirInfo, ref branchSize, recursive);
             }
